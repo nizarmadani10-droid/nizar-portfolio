@@ -1,7 +1,7 @@
 ﻿export const siteConfig = {
   name: "Nizar Madani",
   role: "AI Engineer / Machine Learning Engineer",
-  url: "https://nizar-madani.vercel.app",
+  url: "https://nizar-portfolio-alpha.vercel.app",
   description:
     "Big Data & Artificial Intelligence graduate building the next generation of AI-powered experiences.",
   seoDescription:
