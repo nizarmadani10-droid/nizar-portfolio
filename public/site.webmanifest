@@ -1,0 +1,11 @@
+{
+  "name": "Nizar Madani | AI Engineer Portfolio",
+  "short_name": "Nizar Madani",
+  "description": "AI engineering portfolio focused on machine learning, RAG, NLP, computer vision, data analytics, robotics, and AI-powered systems.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#03050C",
+  "theme_color": "#050A1A",
+  "categories": ["portfolio", "technology", "education"]
+}
