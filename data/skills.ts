@@ -50,48 +50,4 @@ export const skillGroups: SkillGroup[] = [
       "Object Analysis",
     ],
   },
-  {
-    title: "Data Engineering & Analytics",
-    description:
-      "Data processing and analysis skills used in AI, business, and operational optimization projects.",
-    skills: [
-      "Python",
-      "Pandas",
-      "NumPy",
-      "SQL",
-      "Azure SQL",
-      "Data Analysis",
-      "Forecasting",
-      "Data Visualization",
-    ],
-  },
-  {
-    title: "Software Engineering & Tools",
-    description:
-      "Software engineering foundation for building AI-powered applications, dashboards, and web systems.",
-    skills: [
-      "Next.js",
-      "React",
-      "TypeScript",
-      "Flask",
-      "GitHub",
-      "Jupyter Notebook",
-      "VS Code",
-      "API Design",
-    ],
-  },
-  {
-    title: "Robotics & Intelligent Systems",
-    description:
-      "Robotics and simulation exposure connecting AI logic with autonomous system behavior.",
-    skills: [
-      "ROS",
-      "RViz",
-      "Gazebo",
-      "Planning",
-      "Motion Control",
-      "Simulation",
-      "Intelligent Systems",
-    ],
-  },
 ];
