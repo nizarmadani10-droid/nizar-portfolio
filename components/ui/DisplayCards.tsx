@@ -8,7 +8,7 @@ export type DisplayCard = {
 };
 
 type DisplayCardsProps = {
-  cards: DisplayCard[];
+  cards: readonly DisplayCard[];
   className?: string;
 };
 

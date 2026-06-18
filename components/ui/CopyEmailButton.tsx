@@ -1,8 +1,9 @@
 ﻿"use client";
 
 import { useState } from "react";
-import { siteConfig } from "@/lib/constants";
+import { useI18n } from "@/components/providers/I18nProvider";
 import { Button } from "@/components/ui/Button";
+import { siteConfig } from "@/lib/constants";
 
 type CopyEmailButtonProps = {
   className?: string;
@@ -10,6 +11,8 @@ type CopyEmailButtonProps = {
 
 export function CopyEmailButton({ className }: CopyEmailButtonProps) {
   const [copied, setCopied] = useState(false);
+  const { dictionary } = useI18n();
+  const contact = dictionary.contact;
 
   async function handleCopy() {
     try {
@@ -31,7 +34,7 @@ export function CopyEmailButton({ className }: CopyEmailButtonProps) {
       className={className}
       onClick={handleCopy}
     >
-      {copied ? "Email Copied" : "Copy Email"}
+      {copied ? contact.emailCopied : contact.copyEmail}
     </Button>
   );
 }

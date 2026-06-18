@@ -1,23 +1,20 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
+import { useI18n } from "@/components/providers/I18nProvider";
 import type { Project } from "@/data/projects";
+import { projectHref } from "@/lib/i18n";
 
 type ProjectCardProps = {
   project: Project;
 };
 
-const projectThumbnails: Record<string, string> = {
-  "rag-conversational-assistant":
-    "/project-thumbnails/rag-conversational-assistant.png",
-  "intelligent-parking-system":
-    "/project-thumbnails/intelligent-parking-system.png",
-  "rti-ptm-coin-relighting": "/project-thumbnails/rti-ptm-coin-relighting.png",
-  "ros-robotics-project": "/project-thumbnails/ros-robotics-project.png",
-};
-
 export function ProjectCard({ project }: ProjectCardProps) {
+  const { locale, dictionary } = useI18n();
   const visibleTech = project.stack.slice(0, 5);
+  const cardDescription = project.shortDescription ?? project.description;
 
   return (
     <article className="group/card relative flex h-full min-h-[460px] flex-col overflow-hidden rounded-[1.35rem] border border-white/10 bg-[#07101E]/72 shadow-2xl shadow-[#020815]/35 backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:scale-[1.025] hover:border-[#7DF9FF]/40 hover:shadow-[0_28px_90px_rgba(47,128,255,0.18)] group-hover/projects:opacity-70 hover:!opacity-100 sm:rounded-[1.6rem]">
@@ -30,7 +27,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       <div className="relative z-20 flex flex-1 flex-col p-4 sm:p-5">
         <div className="flex flex-wrap items-center gap-2">
           <span className="rounded-full border border-[#7DF9FF]/20 bg-[#7DF9FF]/10 px-2.5 py-1 font-code text-[0.62rem] uppercase leading-5 tracking-[0.13em] text-[#7DF9FF]">
-            {project.category}
+            {dictionary.categories[project.category]}
           </span>
           <span className="rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 font-code text-[0.62rem] uppercase leading-5 tracking-[0.13em] text-[#AEB7C8]">
             {project.signal}
@@ -42,7 +39,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </h3>
 
         <p className="mt-3 line-clamp-2 text-sm leading-6 text-[#AEB7C8]">
-          {project.description}
+          {cardDescription}
         </p>
 
         <div className="mt-5 flex flex-wrap gap-1.5">
@@ -58,10 +55,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
         <div className="mt-auto flex flex-col gap-2.5 pt-6 sm:flex-row sm:flex-wrap">
           <Link
-            href={`/projects/${project.slug}`}
+            href={projectHref(locale, project.slug)}
             className="inline-flex min-h-10 items-center justify-center rounded-full bg-[#2F80FF] px-4 py-2.5 text-center text-sm font-semibold text-white shadow-[0_0_24px_rgba(47,128,255,0.22)] transition duration-300 hover:scale-[1.02] hover:bg-[#1f6ee8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7DF9FF]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#03050C]"
           >
-            Enter project details
+            {dictionary.projects.enterDetails}
           </Link>
 
           {project.githubUrl && (
@@ -71,7 +68,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
               rel="noreferrer"
               className="inline-flex min-h-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.035] px-4 py-2.5 text-center font-code text-[0.66rem] uppercase leading-5 tracking-[0.12em] text-[#AEB7C8] transition duration-300 hover:border-[#7DF9FF]/45 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7DF9FF]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#03050C]"
             >
-              GitHub
+              {dictionary.projects.github}
             </a>
           )}
         </div>
@@ -81,14 +78,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
 }
 
 function ProjectThumbnail({ project }: { project: Project }) {
-  const thumbnailSrc = projectThumbnails[project.slug];
+  const thumbnailSrc = project.thumbnailImage;
 
   return (
     <div className="relative h-48 overflow-hidden border-b border-white/10 bg-[#03050C] sm:h-52">
       {thumbnailSrc && (
         <Image
           src={thumbnailSrc}
-          alt={`${project.title} thumbnail`}
+          alt={project.heroImageAlt ?? `${project.title} project visual thumbnail`}
           fill
           sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
           className="object-cover transition duration-700 group-hover/card:scale-105"

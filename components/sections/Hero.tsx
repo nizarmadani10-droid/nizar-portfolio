@@ -1,61 +1,89 @@
-﻿import { Container } from "@/components/layout/Container";
+"use client";
+
+import { Container } from "@/components/layout/Container";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 import { Reveal } from "@/components/motion/Reveal";
+import { useI18n } from "@/components/providers/I18nProvider";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { CascadeText } from "@/components/ui/CascadeText";
 import { NameLamp } from "@/components/ui/NameLamp";
 import { SplineScene } from "@/components/ui/SplineScene";
 import { siteConfig } from "@/lib/constants";
+import { homeHref } from "@/lib/i18n";
 
 const HERO_SPLINE_SCENE =
   "https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode";
 
 export function Hero() {
+  const { locale, dictionary } = useI18n();
+  const hero = dictionary.hero;
+  const displayName = locale === "ar" ? "نزار مدني" : siteConfig.name;
+
   return (
     <section className="relative z-10 flex min-h-[calc(100svh-4rem)] items-center py-12 sm:py-20 lg:py-24">
       <Container>
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.72fr)] xl:grid-cols-[minmax(0,1fr)_minmax(390px,0.86fr)] xl:gap-14">
           <Reveal>
             <div className="max-w-4xl lg:max-w-2xl xl:max-w-3xl 2xl:max-w-4xl">
-              <Badge className="mb-5 uppercase leading-5 tracking-[0.16em] text-[#7DF9FF] sm:mb-6 sm:tracking-[0.25em]">
-                Available for AI engineering, research & international opportunities
+              <Badge className="mb-5 items-center gap-2 uppercase leading-5 tracking-[0.16em] text-[#7DF9FF] sm:mb-6 sm:tracking-[0.25em]">
+                <span
+                  className="relative inline-flex h-2.5 w-2.5 shrink-0"
+                  aria-hidden="true"
+                >
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22C55E] opacity-70" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#22C55E] shadow-[0_0_14px_rgba(34,197,94,0.65)]" />
+                </span>
+                <span>{hero.badge}</span>
               </Badge>
 
               <NameLamp>
                 <h1 className="font-display text-4xl font-semibold tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl">
-                  <CascadeText text={siteConfig.name} hoverColor="#7DF9FF" />
+                  {locale === "ar" ? (
+                    <span className="inline-block leading-[1.05]" dir="rtl">
+                      {displayName}
+                    </span>
+                  ) : (
+                    <CascadeText text={displayName} hoverColor="#7DF9FF" />
+                  )}
                 </h1>
               </NameLamp>
 
               <p className="mt-4 font-display text-lg text-gradient sm:mt-5 sm:text-2xl md:text-4xl">
-                {siteConfig.role}
+                {hero.role}
               </p>
 
               <p className="mt-6 max-w-2xl text-base leading-7 text-[#AEB7C8] sm:mt-7 sm:text-lg sm:leading-8 md:text-xl">
-                {siteConfig.description}
+                {hero.description}
               </p>
 
               <p className="mt-4 max-w-2xl text-sm leading-7 text-[#6F7A90] sm:text-base">
-                Specialized in machine learning, computer vision, NLP, RAG systems,
-                generative AI, and data analytics.
+                {hero.specialization}
               </p>
 
               <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:gap-4">
                 <MagneticButton className="w-full sm:w-auto">
-                  <Button href="#projects" variant="primary" className="w-full sm:w-auto">
-                    Explore Projects
+                  <Button
+                    href={homeHref(locale, "projects")}
+                    variant="primary"
+                    className="w-full sm:w-auto"
+                  >
+                    {hero.exploreProjects}
                   </Button>
                 </MagneticButton>
 
                 <MagneticButton className="w-full sm:w-auto">
                   <Button href={siteConfig.cvPath} className="w-full sm:w-auto">
-                    Download CV
+                    {hero.downloadCv}
                   </Button>
                 </MagneticButton>
 
-                <Button href="#contact" variant="ghost" className="w-full sm:w-auto">
-                  Contact Me
+                <Button
+                  href={homeHref(locale, "contact")}
+                  variant="ghost"
+                  className="w-full sm:w-auto"
+                >
+                  {hero.contactMe}
                 </Button>
               </div>
             </div>

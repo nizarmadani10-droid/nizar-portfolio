@@ -3,8 +3,10 @@
 import { useMemo, useState } from "react";
 import { Section } from "@/components/layout/Section";
 import { Reveal } from "@/components/motion/Reveal";
+import { useI18n } from "@/components/providers/I18nProvider";
 import { ProjectCard } from "@/components/ui/ProjectCard";
-import { projects, type ProjectCategory } from "@/data/projects";
+import type { ProjectCategory } from "@/data/projects";
+import { getLocalizedProjects } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 type Filter = "All" | ProjectCategory;
@@ -19,21 +21,28 @@ const filters: Filter[] = [
 
 export function FeaturedProjects() {
   const [activeFilter, setActiveFilter] = useState<Filter>("All");
+  const { locale, dictionary } = useI18n();
+  const localizedProjects = useMemo(
+    () => getLocalizedProjects(locale),
+    [locale],
+  );
 
   const filteredProjects = useMemo(() => {
     if (activeFilter === "All") {
-      return projects;
+      return localizedProjects;
     }
 
-    return projects.filter((project) => project.category === activeFilter);
-  }, [activeFilter]);
+    return localizedProjects.filter(
+      (project) => project.category === activeFilter,
+    );
+  }, [activeFilter, localizedProjects]);
 
   return (
     <Section
       id="projects"
-      label="Selected Intelligent Systems"
-      title="AI projects presented as systems, not simple assignments."
-      description="A compact gallery of AI systems. Filter by domain, preview the visual signal, then open the full case study."
+      label={dictionary.projects.label}
+      title={dictionary.projects.title}
+      description={dictionary.projects.description}
     >
       <div className="-mx-5 mb-7 flex gap-2 overflow-x-auto px-5 pb-1 sm:mx-0 sm:mb-8 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0 sm:gap-3">
         {filters.map((filter) => {
@@ -51,13 +60,13 @@ export function FeaturedProjects() {
                   : "border-white/10 bg-white/5 text-[#AEB7C8] hover:border-[#7DF9FF]/30 hover:text-white",
               )}
             >
-              {filter}
+              {dictionary.projects.filters[filter]}
             </button>
           );
         })}
       </div>
 
-      <div className="group/projects grid gap-5 md:grid-cols-2 xl:grid-cols-3 lg:gap-6">
+      <div className="group/projects grid gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
         {filteredProjects.map((project, index) => (
           <Reveal key={project.slug} delay={index * 0.08}>
             <ProjectCard project={project} />

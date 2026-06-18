@@ -36,6 +36,11 @@ export const metadata: Metadata = {
   category: "technology",
   alternates: {
     canonical: "/",
+    languages: {
+      en: "/en",
+      fr: "/fr",
+      ar: "/ar",
+    },
   },
   manifest: "/site.webmanifest",
   openGraph: {

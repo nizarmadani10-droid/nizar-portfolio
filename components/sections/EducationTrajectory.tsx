@@ -1,23 +1,37 @@
+"use client";
+
 import { Section } from "@/components/layout/Section";
 import { Reveal } from "@/components/motion/Reveal";
+import { useI18n } from "@/components/providers/I18nProvider";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
-import {
-  educationTrajectory,
-  languageCredentials,
-  type EducationNode,
-} from "@/data/education";
+
+type EducationDisplayNode = {
+  institution: string;
+  location: string;
+  credential: string;
+  type: string;
+  period: string;
+  description: string;
+  highlights: readonly string[];
+  tags: readonly string[];
+  compact?: boolean;
+  externalUrl?: string;
+  externalLabel?: string;
+};
 
 export function EducationTrajectory() {
-  const primaryNodes = educationTrajectory.filter((node) => !node.compact);
-  const foundationNode = educationTrajectory.find((node) => node.compact);
+  const { dictionary } = useI18n();
+  const section = dictionary.educationSection;
+  const primaryNodes = section.trajectory.filter((node) => !node.compact);
+  const foundationNode = section.trajectory.find((node) => node.compact);
 
   return (
     <Section
       id="education"
-      label="Academic Trajectory"
-      title="Academic foundation for AI engineering and data systems."
-      description="A five-year Moroccan engineering path in Big Data and AI, strengthened by an Italian exchange semester and compact scientific foundations."
+      label={section.label}
+      title={section.title}
+      description={section.description}
     >
       <div className="grid gap-5 sm:gap-6 lg:grid-cols-[1fr_0.38fr] lg:gap-8">
         <div className="relative">
@@ -35,7 +49,17 @@ export function EducationTrajectory() {
                     </div>
                   </div>
 
-                  <EducationCard node={node} index={index} />
+                  <EducationCard
+                    node={node}
+                    index={index}
+                    labels={{
+                      academicRole: section.academicRole,
+                      coreRole: section.coreRole,
+                      exchangeRole: section.exchangeRole,
+                      officialPage: section.officialPage,
+                      viewProgramPage: section.viewProgramPage,
+                    }}
+                  />
                 </div>
               </Reveal>
             ))}
@@ -45,7 +69,10 @@ export function EducationTrajectory() {
         <aside className="space-y-4 sm:space-y-6">
           {foundationNode && (
             <Reveal delay={0.18}>
-              <FoundationCard node={foundationNode} />
+              <FoundationCard
+                node={foundationNode}
+                label={section.academicFoundation}
+              />
             </Reveal>
           )}
 
@@ -53,10 +80,10 @@ export function EducationTrajectory() {
             <Card className="relative overflow-hidden">
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#7DF9FF]/60 to-transparent" />
               <p className="font-code text-xs uppercase tracking-[0.24em] text-[#7DF9FF]">
-                Language Credentials
+                {section.languageCredentials}
               </p>
               <div className="mt-4 grid gap-2.5 sm:mt-5 sm:gap-3">
-                {languageCredentials.map((credential) => (
+                {section.credentials.map((credential) => (
                   <div
                     key={credential.language}
                     className="flex items-center justify-between rounded-2xl border border-white/10 bg-[#03050C]/30 px-3.5 py-2.5 sm:px-4 sm:py-3"
@@ -78,7 +105,21 @@ export function EducationTrajectory() {
   );
 }
 
-function EducationCard({ node, index }: { node: EducationNode; index: number }) {
+function EducationCard({
+  node,
+  index,
+  labels,
+}: {
+  node: EducationDisplayNode;
+  index: number;
+  labels: {
+    academicRole: string;
+    coreRole: string;
+    exchangeRole: string;
+    officialPage: string;
+    viewProgramPage: string;
+  };
+}) {
   return (
     <Card interactive className="relative overflow-hidden p-0">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#7DF9FF]/35 to-transparent sm:via-[#7DF9FF]/70" />
@@ -108,25 +149,23 @@ function EducationCard({ node, index }: { node: EducationNode; index: number }) 
 
           <div className="mt-5 rounded-2xl border border-white/10 bg-[#03050C]/30 p-3.5 sm:mt-6 sm:p-4">
             <p className="font-code text-[0.66rem] uppercase tracking-[0.16em] text-[#7DF9FF]/80 sm:text-[0.68rem] sm:tracking-[0.2em]">
-              Academic Role
+              {labels.academicRole}
             </p>
             <p className="mt-3 text-sm leading-6 text-[#AEB7C8]">
-              {index === 0
-                ? "Core engineering formation in Morocco with a Big Data and AI specialization."
-                : "International exchange experience expanding the academic profile beyond the home engineering program."}
+              {index === 0 ? labels.coreRole : labels.exchangeRole}
             </p>
           </div>
 
           {node.externalUrl && (
             <p className="mt-4 text-sm leading-6 text-[#AEB7C8]">
-              Official page:{" "}
+              {labels.officialPage}:{" "}
               <a
                 href={node.externalUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="font-semibold text-[#7DF9FF] underline decoration-[#7DF9FF]/35 underline-offset-4 transition hover:text-white hover:decoration-white"
               >
-                {node.externalLabel ?? "View Program Page"}
+                {node.externalLabel ?? labels.viewProgramPage}
                 <span aria-hidden="true"> -&gt;</span>
               </a>
             </p>
@@ -166,12 +205,18 @@ function EducationCard({ node, index }: { node: EducationNode; index: number }) 
   );
 }
 
-function FoundationCard({ node }: { node: EducationNode }) {
+function FoundationCard({
+  node,
+  label,
+}: {
+  node: EducationDisplayNode;
+  label: string;
+}) {
   return (
     <Card interactive className="relative overflow-hidden">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#7DF9FF]/35 to-transparent sm:via-[#7DF9FF]/50" />
       <p className="font-code text-xs uppercase tracking-[0.24em] text-[#7DF9FF]">
-        Academic Foundation
+        {label}
       </p>
 
       <h3 className="mt-4 font-display text-lg font-semibold text-white sm:text-xl">

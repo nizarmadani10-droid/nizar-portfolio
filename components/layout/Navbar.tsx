@@ -1,27 +1,38 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Container } from "@/components/layout/Container";
+import { useI18n } from "@/components/providers/I18nProvider";
 import { Button } from "@/components/ui/Button";
 import { siteConfig } from "@/lib/constants";
+import {
+  getDictionary,
+  homeHref,
+  localeLabels,
+  locales,
+  localizePath,
+  type Locale,
+} from "@/lib/i18n";
+import { cn } from "@/lib/utils";
 
-const navItems = [
-  { label: "Projects", href: "/#projects" },
-  { label: "Skills", href: "/#skills" },
-  { label: "Experience", href: "/#experience" },
-  { label: "Education", href: "/#education" },
-  { label: "Contact", href: "/#contact" },
-];
+const navTargets = [
+  { key: "projects", hash: "projects" },
+  { key: "skills", hash: "skills" },
+  { key: "experience", hash: "experience" },
+  { key: "education", hash: "education" },
+  { key: "contact", hash: "contact" },
+] as const;
 
 const socialLinks = [
   {
-    label: "GitHub profile",
+    key: "github",
     href: siteConfig.links.github,
     icon: "github",
   },
   {
-    label: "LinkedIn profile",
+    key: "linkedin",
     href: siteConfig.links.linkedin,
     icon: "linkedin",
   },
@@ -29,93 +40,172 @@ const socialLinks = [
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const { locale, dictionary } = useI18n();
+  const nav = locale === "ar" ? getDictionary("en").nav : dictionary.nav;
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-white/10 bg-[#03050C]/78 backdrop-blur-xl lg:bg-[#03050C]/55">
-      <Container className="flex items-center justify-between py-3 lg:py-3.5">
+    <nav
+      lang={locale === "ar" ? "en" : locale}
+      dir="ltr"
+      className="sticky top-0 z-50 border-b border-white/10 bg-[#03050C]/78 backdrop-blur-xl lg:bg-[#03050C]/55"
+    >
+      <Container className="flex items-center justify-between gap-4 py-3 lg:py-3.5">
         <Link
-          href="/"
+          href={homeHref(locale)}
           className="shrink-0 font-display text-lg font-semibold tracking-tight"
           onClick={() => setIsOpen(false)}
         >
           Nizar<span className="text-[#7DF9FF]">.</span>
         </Link>
 
-        <div className="hidden items-center gap-6 text-sm text-[#AEB7C8] lg:flex xl:gap-8">
-          {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
+        <div className="hidden items-center gap-4 text-sm text-[#AEB7C8] lg:flex xl:gap-8">
+          {navTargets.map((item) => (
+            <Link
+              key={item.hash}
+              href={homeHref(locale, item.hash)}
               className="whitespace-nowrap transition hover:text-white"
             >
-              {item.label}
-            </a>
+              {nav[item.key]}
+            </Link>
           ))}
         </div>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-2 lg:flex xl:gap-3">
           {socialLinks.map((link) => (
             <SocialIconLink
-              key={link.label}
+              key={link.key}
               href={link.href}
-              label={link.label}
+              label={
+                link.key === "github"
+                  ? nav.githubProfile
+                  : nav.linkedinProfile
+              }
               icon={link.icon}
             />
           ))}
 
-          <Button href={siteConfig.cvPath} size="sm">
-            Download CV
-          </Button>
+          <LanguageSwitcher pathname={pathname} activeLocale={locale} />
         </div>
 
         <button
           type="button"
           className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-[#7DF9FF]/35 hover:bg-white/[0.06] lg:hidden"
           onClick={() => setIsOpen((current) => !current)}
-          aria-label="Toggle menu"
+          aria-label={nav.toggleMenu}
         >
-          {isOpen ? "×" : "☰"}
+          <span aria-hidden="true" className="relative block h-4 w-4">
+            <span
+              className={cn(
+                "absolute left-0 top-1/2 h-px w-4 bg-current transition",
+                isOpen ? "rotate-45" : "-translate-y-1.5",
+              )}
+            />
+            <span
+              className={cn(
+                "absolute left-0 top-1/2 h-px w-4 bg-current transition",
+                isOpen ? "opacity-0" : "opacity-100",
+              )}
+            />
+            <span
+              className={cn(
+                "absolute left-0 top-1/2 h-px w-4 bg-current transition",
+                isOpen ? "-rotate-45" : "translate-y-1.5",
+              )}
+            />
+          </span>
         </button>
       </Container>
 
       {isOpen && (
         <div className="border-t border-white/10 bg-[#03050C]/96 px-5 py-5 backdrop-blur-xl sm:px-6 lg:hidden">
           <div className="flex flex-col gap-4">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
+            <div className="border-b border-white/10 pb-4">
+              <LanguageSwitcher pathname={pathname} activeLocale={locale} />
+            </div>
+
+            {navTargets.map((item) => (
+              <Link
+                key={item.hash}
+                href={homeHref(locale, item.hash)}
                 className="rounded-2xl px-1 py-1.5 font-display text-xl text-white transition hover:bg-white/[0.04]"
                 onClick={() => setIsOpen(false)}
               >
-                {item.label}
-              </a>
+                {nav[item.key]}
+              </Link>
             ))}
 
             <div className="grid gap-3 border-t border-white/10 pt-5">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={link.label}
-                  className="flex min-h-11 items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.035] px-4 py-2.5 text-sm font-medium text-[#DDE4F2] transition hover:border-[#7DF9FF]/35 hover:bg-[#7DF9FF]/10 hover:text-white"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <SocialIcon icon={link.icon} />
-                  {link.label === "GitHub profile" ? "GitHub" : "LinkedIn"}
-                </a>
-              ))}
+              {socialLinks.map((link) => {
+                const label =
+                  link.key === "github"
+                    ? nav.githubProfile
+                    : nav.linkedinProfile;
+
+                return (
+                  <a
+                    key={link.key}
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={label}
+                    className="flex min-h-11 items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.035] px-4 py-2.5 text-sm font-medium text-[#DDE4F2] transition hover:border-[#7DF9FF]/35 hover:bg-[#7DF9FF]/10 hover:text-white"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <SocialIcon icon={link.icon} />
+                    {link.key === "github" ? "GitHub" : "LinkedIn"}
+                  </a>
+                );
+              })}
             </div>
 
             <Button href={siteConfig.cvPath} className="mt-2 w-full">
-              Download CV
+              {nav.downloadCv}
             </Button>
           </div>
         </div>
       )}
     </nav>
+  );
+}
+
+function LanguageSwitcher({
+  pathname,
+  activeLocale,
+  className,
+}: {
+  pathname: string;
+  activeLocale: Locale;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn(
+        "flex items-center gap-0.5 rounded-full border border-white/10 bg-white/[0.035] p-0.5 sm:gap-1 sm:p-1",
+        className,
+      )}
+      aria-label="Language switcher"
+    >
+      {locales.map((locale) => {
+        const isActive = locale === activeLocale;
+
+        return (
+          <Link
+            key={locale}
+            href={localizePath(pathname, locale)}
+            aria-current={isActive ? "page" : undefined}
+            className={cn(
+              "rounded-full px-2 py-1 font-code text-[0.6rem] font-semibold uppercase tracking-[0.12em] transition sm:px-2.5 sm:py-1.5 sm:text-[0.65rem] sm:tracking-[0.14em]",
+              isActive
+                ? "bg-[#7DF9FF]/14 text-white shadow-[0_0_18px_rgba(125,249,255,0.12)]"
+                : "text-[#8F9AAF] hover:bg-white/[0.06] hover:text-white",
+            )}
+          >
+            {localeLabels[locale]}
+          </Link>
+        );
+      })}
+    </div>
   );
 }
 
@@ -125,7 +215,7 @@ function SocialIconLink({
   icon,
 }: {
   href: string;
-  label: "GitHub profile" | "LinkedIn profile";
+  label: string;
   icon: "github" | "linkedin";
 }) {
   return (

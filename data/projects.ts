@@ -10,12 +10,15 @@ export type Project = {
   domain: string;
   category: ProjectCategory;
   description: string;
+  shortDescription?: string;
   problem: string;
   solution: string;
   architecture: string[];
   stack: string[];
   impact: string;
   signal: string;
+  thumbnailImage?: string;
+  heroImageAlt?: string;
   heroImage?: string;
   githubUrl?: string;
 };
@@ -43,7 +46,10 @@ export const projects: Project[] = [
     impact:
       "Improved access to internal knowledge while keeping responses grounded in retrieved material.",
     signal: "Document Intelligence System",
+    thumbnailImage: "/project-thumbnails/rag-conversational-assistant.png",
     heroImage: "/project-backgrounds/rag-background.png",
+    heroImageAlt:
+      "A document intelligence assistant with files, database, and conversational AI elements.",
     githubUrl: "https://github.com/nizarmadani10-droid/NLP-PROJECT",
   },
   {
@@ -68,7 +74,10 @@ export const projects: Project[] = [
     impact:
       "Automated plate recognition and reduced friction in vehicle data workflows.",
     signal: "Applied AI Automation",
+    thumbnailImage: "/project-thumbnails/intelligent-parking-system.png",
     heroImage: "/project-backgrounds/intelligent-parking-background.png",
+    heroImageAlt:
+      "An intelligent parking garage scene with a vehicle, camera, and analytics dashboard.",
     githubUrl: "https://github.com/nizarmadani10-droid/NLP-PROJECT",
   },
   {
@@ -93,7 +102,10 @@ export const projects: Project[] = [
     impact:
       "Enabled dynamic visualization of object texture, relief, and material details.",
     signal: "Research-Oriented Vision",
+    thumbnailImage: "/project-thumbnails/rti-ptm-coin-relighting.png",
     heroImage: "/project-backgrounds/rti-ptm-background.png",
+    heroImageAlt:
+      "A coin relighting and computer vision lab with inspection lights and surface analysis screens.",
     githubUrl: "https://github.com/nizarmadani10-droid/NLP-PROJECT",
   },
   {
@@ -112,7 +124,84 @@ export const projects: Project[] = [
     impact:
       "Connected AI logic with autonomous robotics simulation and repeatable system testing.",
     signal: "Robotics Control System",
+    thumbnailImage: "/project-thumbnails/ros-robotics-project.png",
     heroImage: "/project-backgrounds/ros-robotics-background.png",
+    heroImageAlt:
+      "A robotics path-planning scene with a rover, digital map, and autonomous navigation interface.",
+    githubUrl: "https://github.com/nizarmadani10-droid/NLP-PROJECT",
+  },
+  {
+    title: "English \u2192 Darija Translator",
+    slug: "english-darija-translator",
+    domain: "Language AI / NLP",
+    category: "Language AI",
+    description:
+      "A neural machine translation project for translating English into Moroccan Darija.",
+    shortDescription:
+      "A neural translation project focused on converting English text into Moroccan Darija using NLP preprocessing and sequence modeling.",
+    problem:
+      "Darija is a low-resource language, so the project explores a regional NLP use case.",
+    solution:
+      "The pipeline preprocesses English text, tokenizes sequences, encodes language patterns, and generates Darija output through sequence modeling.",
+    architecture: [
+      "English Input",
+      "Preprocessing",
+      "Sequence Encoding",
+      "Model Inference",
+      "Darija Output",
+    ],
+    stack: [
+      "Python",
+      "TensorFlow/Keras",
+      "NLP",
+      "Seq2Seq",
+      "LSTM",
+      "Tokenization",
+    ],
+    impact:
+      "Academic demo showing how sequence models can be used for English-to-Darija translation.",
+    signal: "Low-Resource NLP Translation",
+    thumbnailImage: "/project-thumbnails/english-darija-translator.png",
+    heroImage: "/project-backgrounds/english-darija-translator-background.png",
+    heroImageAlt:
+      "A neural translation interface connecting English input to Moroccan Darija output.",
+    githubUrl: "https://github.com/nizarmadani10-droid/NLP-PROJECT",
+  },
+  {
+    title: "Butterfly Image Classification",
+    slug: "butterfly-image-classification",
+    domain: "Computer Vision / Image Classification",
+    category: "Computer Vision",
+    description:
+      "A deep learning project for butterfly species recognition from image data.",
+    shortDescription:
+      "A computer vision project for classifying butterfly species from images using CNN-based learning and transfer learning.",
+    problem:
+      "Classify butterfly species using visual patterns and image features.",
+    solution:
+      "The system preprocesses image data, trains CNN and transfer-learning models, and evaluates species predictions against labeled butterfly classes.",
+    architecture: [
+      "Image Dataset",
+      "Preprocessing",
+      "CNN / Transfer Learning",
+      "Prediction",
+      "Evaluation",
+    ],
+    stack: [
+      "Python",
+      "TensorFlow/Keras",
+      "CNN",
+      "VGG16",
+      "Transfer Learning",
+      "Computer Vision",
+    ],
+    impact:
+      "Academic computer vision project showing image classification and transfer learning.",
+    signal: "Species Recognition System",
+    thumbnailImage: "/project-thumbnails/butterfly-image-classification.png",
+    heroImage: "/project-backgrounds/butterfly-image-classification-background.png",
+    heroImageAlt:
+      "A butterfly image classification scene with detected species and model confidence panels.",
     githubUrl: "https://github.com/nizarmadani10-droid/NLP-PROJECT",
   },
 ];

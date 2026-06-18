@@ -5,9 +5,22 @@ import { Card } from "@/components/ui/Card";
 
 type ExperienceCardProps = {
   experience: Experience;
+  labels?: {
+    focus: string;
+    contributions: string;
+    stackTools: string;
+    downloadReport: string;
+  };
 };
 
-export function ExperienceCard({ experience }: ExperienceCardProps) {
+export function ExperienceCard({ experience, labels }: ExperienceCardProps) {
+  const copy = labels ?? {
+    focus: "Focus",
+    contributions: "Contributions",
+    stackTools: "Stack / Tools",
+    downloadReport: "Download Report",
+  };
+
   return (
     <Card interactive className="group relative overflow-hidden p-0">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#7DF9FF]/35 to-transparent opacity-70 sm:via-[#7DF9FF]/60" />
@@ -34,7 +47,7 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
 
           <div className="mt-5 rounded-2xl border border-white/10 bg-[#03050C]/30 p-3.5 sm:mt-6 sm:p-4">
             <p className="font-code text-[0.66rem] uppercase tracking-[0.16em] text-[#7DF9FF]/80 sm:text-[0.68rem] sm:tracking-[0.2em]">
-              Focus
+              {copy.focus}
             </p>
             <p className="mt-3 text-sm leading-6 text-[#AEB7C8]">
               {experience.focus}
@@ -45,7 +58,7 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
         <div className="flex flex-col">
           <div>
             <p className="font-code text-[0.66rem] uppercase tracking-[0.16em] text-[#7DF9FF]/80 sm:text-[0.68rem] sm:tracking-[0.2em]">
-              Contributions
+              {copy.contributions}
             </p>
             <ul className="mt-3 space-y-2.5 sm:mt-4 sm:space-y-3">
               {experience.highlights.map((highlight) => (
@@ -62,7 +75,7 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
 
           <div className="mt-5 border-t border-white/10 pt-4 sm:mt-6 sm:pt-5">
             <p className="font-code text-[0.66rem] uppercase tracking-[0.16em] text-[#6F7A90] sm:text-[0.68rem] sm:tracking-[0.2em]">
-              Stack / Tools
+              {copy.stackTools}
             </p>
             <div className="mt-3 flex flex-wrap gap-1.5 sm:mt-4 sm:gap-2">
               {experience.tools.map((tool) => (
@@ -84,7 +97,7 @@ export function ExperienceCard({ experience }: ExperienceCardProps) {
                   variant="secondary"
                   className="w-full border-[#7DF9FF]/30 bg-[#7DF9FF]/[0.06] sm:w-auto"
                 >
-                  {experience.reportLabel ?? "Download Report"}
+                  {experience.reportLabel ?? copy.downloadReport}
                 </Button>
               </div>
             )}
