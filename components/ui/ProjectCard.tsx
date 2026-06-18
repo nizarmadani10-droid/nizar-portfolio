@@ -1,8 +1,6 @@
 import Link from "next/link";
 import type { Project } from "@/data/projects";
-import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
-import { cn } from "@/lib/utils";
 
 type ProjectCardProps = {
   project: Project;
@@ -12,7 +10,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Card
       interactive
-      className="group relative flex h-full min-h-0 flex-col overflow-hidden p-0 sm:min-h-[560px]"
+      className="group relative flex h-full min-h-0 flex-col overflow-hidden p-0 sm:min-h-[430px]"
     >
       <Link
         href={`/projects/${project.slug}`}
@@ -32,7 +30,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             {project.signal}
           </span>
           <span className="max-w-full rounded-full border border-white/10 bg-white/[0.035] px-2.5 py-1 font-code text-[0.64rem] uppercase leading-5 tracking-[0.12em] text-[#AEB7C8] sm:px-3 sm:text-[0.68rem] sm:tracking-[0.18em]">
-            {project.domain}
+            {project.category}
           </span>
         </div>
 
@@ -47,44 +45,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <div className="mt-5 grid gap-3 sm:mt-6 sm:grid-cols-2">
           <SystemBlock label="Problem" body={project.problem} />
           <SystemBlock label="Solution" body={project.solution} />
-        </div>
-
-        <div className="mt-5 rounded-2xl border border-white/10 bg-[#03050C]/30 p-3.5 sm:mt-6 sm:p-4">
-          <p className="font-code text-[0.66rem] uppercase tracking-[0.16em] text-[#7DF9FF]/80 sm:text-[0.68rem] sm:tracking-[0.2em]">
-            System Flow
-          </p>
-          <div className="mt-3 flex flex-wrap items-center gap-2 sm:mt-4">
-            {project.architecture.map((step, index) => (
-              <div key={step} className="flex items-center gap-2">
-                <span
-                  className={cn(
-                    "max-w-full rounded-full border px-2.5 py-1.5 font-code text-[0.64rem] uppercase leading-5 tracking-[0.1em] sm:px-3 sm:text-[0.7rem] sm:tracking-[0.14em]",
-                    index === 0
-                      ? "border-[#7DF9FF]/35 bg-[#7DF9FF]/10 text-[#DDFEFF]"
-                      : "border-white/10 bg-white/[0.04] text-[#AEB7C8]",
-                  )}
-                >
-                  {step}
-                </span>
-                {index < project.architecture.length - 1 && (
-                  <span className="font-code text-xs text-[#7DF9FF]/50">
-                    &rarr;
-                  </span>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-5 flex flex-wrap gap-1.5 sm:mt-6 sm:gap-2">
-          {project.stack.map((tech) => (
-            <Badge
-              key={tech}
-              className="border-[#7DF9FF]/10 bg-[#7DF9FF]/[0.035] text-[#AEB7C8]"
-            >
-              {tech}
-            </Badge>
-          ))}
         </div>
 
         <p className="mt-5 border-t border-white/10 pt-4 text-sm leading-6 text-[#8F9AAF] sm:mt-auto sm:pt-5">

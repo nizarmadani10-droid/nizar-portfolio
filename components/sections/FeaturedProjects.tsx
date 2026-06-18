@@ -33,7 +33,7 @@ export function FeaturedProjects() {
       id="projects"
       label="Selected Intelligent Systems"
       title="AI projects presented as systems, not simple assignments."
-      description="Filter the systems by AI domain and inspect the problem, solution, architecture, stack, and measurable signal behind each project."
+      description="Filter the systems by AI domain and inspect the core problem, solution, signal, and impact before opening the full case study."
     >
       <div className="-mx-5 mb-7 flex gap-2 overflow-x-auto px-5 pb-1 sm:mx-0 sm:mb-8 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0 sm:gap-3">
         {filters.map((filter) => {
