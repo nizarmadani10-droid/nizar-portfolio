@@ -4,6 +4,8 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
+import { CascadeText } from "@/components/ui/CascadeText";
+import { NameLamp } from "@/components/ui/NameLamp";
 import { SplineScene } from "@/components/ui/SplineScene";
 import { siteConfig } from "@/lib/constants";
 
@@ -21,9 +23,11 @@ export function Hero() {
                 Available for AI engineering, research & international opportunities
               </Badge>
 
-              <h1 className="font-display text-4xl font-semibold tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl">
-                {siteConfig.name}
-              </h1>
+              <NameLamp>
+                <h1 className="font-display text-4xl font-semibold tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl">
+                  <CascadeText text={siteConfig.name} hoverColor="#7DF9FF" />
+                </h1>
+              </NameLamp>
 
               <p className="mt-4 font-display text-lg text-gradient sm:mt-5 sm:text-2xl md:text-4xl">
                 {siteConfig.role}

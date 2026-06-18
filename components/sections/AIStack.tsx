@@ -1,6 +1,7 @@
 import { Section } from "@/components/layout/Section";
 import { Reveal } from "@/components/motion/Reveal";
 import { DisplayCards, type DisplayCard } from "@/components/ui/DisplayCards";
+import { GeminiLines } from "@/components/ui/GeminiLines";
 
 const stackHighlights: DisplayCard[] = [
   {
@@ -43,7 +44,10 @@ export function AIStack() {
       </Reveal>
 
       <Reveal delay={0.08} className="mt-7 sm:mt-9">
-        <DisplayCards cards={stackHighlights} className="mx-auto" />
+        <div className="relative mx-auto w-full">
+          <GeminiLines className="left-1/2 top-1/2 h-[340px] w-screen -translate-x-1/2 -translate-y-1/2 sm:h-[390px]" />
+          <DisplayCards cards={stackHighlights} className="relative z-10 mx-auto" />
+        </div>
       </Reveal>
     </Section>
   );

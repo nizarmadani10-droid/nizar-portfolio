@@ -2,6 +2,7 @@
 import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
+import { ContactScrollContainer } from "@/components/ui/ContactScrollContainer";
 import { ContactInput, ContactTextarea } from "@/components/ui/ContactInput";
 import { CopyEmailButton } from "@/components/ui/CopyEmailButton";
 import { siteConfig } from "@/lib/constants";
@@ -10,7 +11,7 @@ export function Contact() {
   return (
     <Section id="contact" className="pb-16 sm:pb-20 lg:pb-24">
       <Reveal>
-        <div className="glass-panel rounded-[1.25rem] p-4 sm:rounded-[2rem] sm:p-8 md:p-12">
+        <ContactScrollContainer>
           <p className="font-code text-[0.68rem] uppercase leading-5 tracking-[0.22em] text-[#7DF9FF] sm:text-xs sm:tracking-[0.3em]">
             Contact
           </p>
@@ -81,7 +82,7 @@ export function Contact() {
               </div>
             </Card>
           </div>
-        </div>
+        </ContactScrollContainer>
       </Reveal>
     </Section>
   );
