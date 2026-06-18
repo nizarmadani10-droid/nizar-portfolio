@@ -3,7 +3,6 @@ import { MagneticButton } from "@/components/motion/MagneticButton";
 import { Reveal } from "@/components/motion/Reveal";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
 import { CascadeText } from "@/components/ui/CascadeText";
 import { NameLamp } from "@/components/ui/NameLamp";
 import { SplineScene } from "@/components/ui/SplineScene";
@@ -63,17 +62,17 @@ export function Hero() {
           </Reveal>
 
           <Reveal delay={0.16} className="hidden lg:block">
-            <Card
-              interactive
-              className="blue-glow relative h-[360px] overflow-hidden !rounded-[2rem] border-[#7DF9FF]/15 !p-0 xl:h-[520px]"
-            >
-              <div className="pointer-events-none absolute -left-24 top-10 h-56 w-56 rounded-full bg-[#2F80FF]/20 blur-3xl" />
-              <div className="pointer-events-none absolute -right-24 bottom-10 h-64 w-64 rounded-full bg-[#7DF9FF]/12 blur-3xl" />
-              <SplineScene scene={HERO_SPLINE_SCENE} className="relative z-10 h-full" />
-              <div className="pointer-events-none absolute inset-0 z-20 bg-[radial-gradient(circle_at_50%_22%,transparent_0%,rgba(3,5,12,0.12)_58%,rgba(3,5,12,0.72)_100%)]" />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-24 bg-gradient-to-t from-[#03050C]/80 to-transparent" />
-              <div className="pointer-events-none absolute inset-4 z-30 rounded-[1.55rem] border border-[#7DF9FF]/10" />
-            </Card>
+            <div className="relative -mt-10 h-[500px] overflow-visible xl:-mt-16 xl:h-[680px]">
+              <div className="pointer-events-none absolute left-1/2 top-[44%] h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#2F80FF]/18 blur-3xl xl:h-[34rem] xl:w-[34rem]" />
+              <div className="pointer-events-none absolute bottom-8 right-4 h-80 w-80 rounded-full bg-[#7DF9FF]/14 blur-3xl xl:h-[28rem] xl:w-[28rem]" />
+              <div className="pointer-events-none absolute inset-x-4 bottom-0 h-28 bg-gradient-to-t from-[#03050C]/80 to-transparent xl:h-36" />
+              <SplineScene
+                scene={HERO_SPLINE_SCENE}
+                globalPointerTracking
+                className="relative z-10 h-full origin-center -translate-y-10 scale-[1.28] drop-shadow-[0_32px_80px_rgba(125,249,255,0.2)] xl:-translate-y-16 xl:scale-[1.34]"
+              />
+              <div className="pointer-events-none absolute inset-0 z-20 bg-[radial-gradient(circle_at_50%_22%,transparent_0%,rgba(3,5,12,0.08)_62%,rgba(3,5,12,0.44)_100%)]" />
+            </div>
           </Reveal>
         </div>
       </Container>

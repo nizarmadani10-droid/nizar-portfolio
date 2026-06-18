@@ -16,6 +16,7 @@ export type Project = {
   stack: string[];
   impact: string;
   signal: string;
+  heroImage?: string;
   githubUrl?: string;
 };
 
@@ -42,6 +43,7 @@ export const projects: Project[] = [
     impact:
       "Improved access to internal knowledge while keeping responses grounded in retrieved material.",
     signal: "Document Intelligence System",
+    heroImage: "/project-backgrounds/rag-background.png",
     githubUrl: "https://github.com/nizarmadani10-droid/NLP-PROJECT",
   },
   {
@@ -66,6 +68,7 @@ export const projects: Project[] = [
     impact:
       "Automated plate recognition and reduced friction in vehicle data workflows.",
     signal: "Applied AI Automation",
+    heroImage: "/project-backgrounds/intelligent-parking-background.png",
     githubUrl: "https://github.com/nizarmadani10-droid/NLP-PROJECT",
   },
   {
@@ -90,6 +93,7 @@ export const projects: Project[] = [
     impact:
       "Enabled dynamic visualization of object texture, relief, and material details.",
     signal: "Research-Oriented Vision",
+    heroImage: "/project-backgrounds/rti-ptm-background.png",
     githubUrl: "https://github.com/nizarmadani10-droid/NLP-PROJECT",
   },
   {
@@ -108,6 +112,7 @@ export const projects: Project[] = [
     impact:
       "Connected AI logic with autonomous robotics simulation and repeatable system testing.",
     signal: "Robotics Control System",
+    heroImage: "/project-backgrounds/ros-robotics-background.png",
     githubUrl: "https://github.com/nizarmadani10-droid/NLP-PROJECT",
   },
 ];

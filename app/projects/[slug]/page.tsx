@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AnimatedGrid } from "@/components/motion/AnimatedGrid";
@@ -92,8 +93,26 @@ export default async function ProjectCaseStudyPage({
       <AnimatedGrid />
       <Navbar />
 
-      <section className="relative z-10 py-16 md:py-24">
-        <Container>
+      <section className="relative z-10 overflow-hidden py-16 md:py-24">
+        {project.heroImage && (
+          <>
+            <Image
+              src={project.heroImage}
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="absolute inset-0 z-0 object-cover object-[70%_center] opacity-40 saturate-[1.16] contrast-110 sm:opacity-55 md:opacity-70 lg:object-center"
+            />
+            <div className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(3,5,12,0.7)_0%,rgba(3,5,12,0.58)_34%,rgba(3,5,12,0.2)_68%,rgba(3,5,12,0.36)_100%)] md:bg-[linear-gradient(90deg,rgba(3,5,12,0.62)_0%,rgba(3,5,12,0.46)_34%,rgba(3,5,12,0.08)_68%,rgba(3,5,12,0.22)_100%)]" />
+            <div className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(180deg,rgba(3,5,12,0.58)_0%,rgba(3,5,12,0.04)_42%,rgba(3,5,12,0.9)_100%)]" />
+            <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(circle_at_76%_22%,rgba(125,249,255,0.2),transparent_34%),radial-gradient(circle_at_16%_8%,rgba(46,123,255,0.12),transparent_36%)]" />
+          </>
+        )}
+        <AnimatedGrid className="z-[2] opacity-30 sm:opacity-40" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[3] h-32 bg-gradient-to-b from-transparent to-[#03050C]" />
+
+        <Container className="relative z-10">
           <div className="mb-10">
             <Button href="/#projects" variant="ghost" size="sm">
               Back to projects
@@ -101,7 +120,8 @@ export default async function ProjectCaseStudyPage({
           </div>
 
           <div className="grid gap-8 lg:grid-cols-[1.35fr_0.65fr] lg:items-end">
-            <div className="max-w-5xl">
+            <div className="relative isolate max-w-5xl">
+              <div className="pointer-events-none absolute -inset-x-5 -inset-y-6 -z-10 rounded-[2rem] border border-white/10 bg-[#03050C]/35 shadow-[0_24px_90px_rgba(0,0,0,0.38)] backdrop-blur-[2px] md:bg-[#03050C]/25" />
               <div className="flex flex-wrap gap-3">
                 <span className="rounded-full border border-[#7DF9FF]/30 bg-[#7DF9FF]/10 px-4 py-2 font-code text-xs uppercase tracking-[0.2em] text-[#7DF9FF]">
                   {project.signal}
@@ -140,7 +160,11 @@ export default async function ProjectCaseStudyPage({
               </div>
             </Card>
           </div>
+        </Container>
+      </section>
 
+      <section className="relative z-10 pb-16 md:pb-24">
+        <Container>
           <Card className="mt-10 overflow-hidden p-0">
             <div className="border-b border-white/10 px-6 py-5">
               <p className="font-code text-xs uppercase tracking-[0.24em] text-[#7DF9FF]">

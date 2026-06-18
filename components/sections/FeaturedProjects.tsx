@@ -33,7 +33,7 @@ export function FeaturedProjects() {
       id="projects"
       label="Selected Intelligent Systems"
       title="AI projects presented as systems, not simple assignments."
-      description="Filter the systems by AI domain and inspect the core problem, solution, signal, and impact before opening the full case study."
+      description="A compact gallery of AI systems. Filter by domain, preview the visual signal, then open the full case study."
     >
       <div className="-mx-5 mb-7 flex gap-2 overflow-x-auto px-5 pb-1 sm:mx-0 sm:mb-8 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0 sm:gap-3">
         {filters.map((filter) => {
@@ -57,7 +57,7 @@ export function FeaturedProjects() {
         })}
       </div>
 
-      <div className="grid gap-5 md:grid-cols-2 lg:gap-6">
+      <div className="group/projects grid gap-5 md:grid-cols-2 xl:grid-cols-3 lg:gap-6">
         {filteredProjects.map((project, index) => (
           <Reveal key={project.slug} delay={index * 0.08}>
             <ProjectCard project={project} />
