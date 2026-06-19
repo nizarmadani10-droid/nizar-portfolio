@@ -9,6 +9,7 @@ type SplineSceneProps = {
   scene: string;
   className?: string;
   globalPointerTracking?: boolean;
+  touchPointerTracking?: boolean;
 };
 
 function SplineFallback() {
@@ -29,24 +30,30 @@ export function SplineScene({
   scene,
   className,
   globalPointerTracking = false,
+  touchPointerTracking = false,
 }: SplineSceneProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!globalPointerTracking) {
+    if (!globalPointerTracking && !touchPointerTracking) {
       return;
     }
 
-    const canTrackPointer =
+    const canTrackMouse =
+      globalPointerTracking &&
       window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const canTrackTouch =
+      touchPointerTracking &&
+      window.matchMedia("(hover: none), (pointer: coarse)").matches;
 
-    if (!canTrackPointer) {
+    if (!canTrackMouse && !canTrackTouch) {
       return;
     }
 
     const target = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
     const current = { ...target };
     let frameId = 0;
+    let pointerType: "mouse" | "touch" = "mouse";
 
     const dispatchPointerMove = () => {
       current.x += (target.x - current.x) * 0.1;
@@ -78,7 +85,7 @@ export function SplineScene({
             new PointerEvent("pointermove", {
               ...eventInit,
               pointerId: 1,
-              pointerType: "mouse",
+              pointerType,
               isPrimary: true,
             }),
           );
@@ -91,8 +98,20 @@ export function SplineScene({
     };
 
     const handlePointerMove = (event: PointerEvent) => {
-      if (!event.isTrusted || event.pointerType === "touch") {
+      if (!event.isTrusted) {
         return;
+      }
+
+      if (event.pointerType === "touch") {
+        if (!canTrackTouch) {
+          return;
+        }
+        pointerType = "touch";
+      } else {
+        if (!canTrackMouse) {
+          return;
+        }
+        pointerType = "mouse";
       }
 
       target.x = event.clientX;
@@ -103,25 +122,49 @@ export function SplineScene({
       }
     };
 
+    const handleTouchMove = (event: TouchEvent) => {
+      if (!canTrackTouch || event.touches.length === 0) {
+        return;
+      }
+
+      pointerType = "touch";
+      target.x = event.touches[0].clientX;
+      target.y = event.touches[0].clientY;
+
+      if (!frameId) {
+        frameId = window.requestAnimationFrame(dispatchPointerMove);
+      }
+    };
+
     window.addEventListener("pointermove", handlePointerMove, {
+      passive: true,
+    });
+    window.addEventListener("pointerdown", handlePointerMove, {
+      passive: true,
+    });
+    window.addEventListener("touchmove", handleTouchMove, {
       passive: true,
     });
 
     return () => {
       window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerdown", handlePointerMove);
+      window.removeEventListener("touchmove", handleTouchMove);
       window.cancelAnimationFrame(frameId);
     };
-  }, [globalPointerTracking]);
+  }, [globalPointerTracking, touchPointerTracking]);
+
+  const isDecorativeTracking = globalPointerTracking || touchPointerTracking;
 
   return (
     <div
       ref={containerRef}
       className={cn(
         "relative h-full w-full overflow-hidden",
-        globalPointerTracking && "pointer-events-none",
+        isDecorativeTracking && "pointer-events-none",
         className,
       )}
-      aria-hidden={globalPointerTracking ? "true" : undefined}
+      aria-hidden={isDecorativeTracking ? "true" : undefined}
     >
       <Suspense fallback={<SplineFallback />}>
         <Spline scene={scene} className="h-full w-full" />

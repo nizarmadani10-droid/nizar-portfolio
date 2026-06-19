@@ -22,20 +22,26 @@ export function Hero() {
 
   return (
     <section className="relative z-10 flex min-h-[calc(100svh-4rem)] items-center py-12 sm:py-20 lg:py-24">
-      <Container>
+      <Container className="relative z-10">
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.72fr)] xl:grid-cols-[minmax(0,1fr)_minmax(390px,0.86fr)] xl:gap-14">
           <Reveal>
             <div className="max-w-4xl lg:max-w-2xl xl:max-w-3xl 2xl:max-w-4xl">
-              <Badge className="mb-5 items-center gap-2 uppercase leading-5 tracking-[0.16em] text-[#7DF9FF] sm:mb-6 sm:tracking-[0.25em]">
-                <span
-                  className="relative inline-flex h-2.5 w-2.5 shrink-0"
-                  aria-hidden="true"
-                >
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22C55E] opacity-70" />
-                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#22C55E] shadow-[0_0_14px_rgba(34,197,94,0.65)]" />
-                </span>
-                <span>{hero.badge}</span>
-              </Badge>
+              <div
+                className={
+                  locale === "ar" ? "mb-8 flex sm:mb-10" : "mb-5 flex sm:mb-6"
+                }
+              >
+                <Badge className="items-center gap-2 uppercase leading-5 tracking-[0.16em] text-[#7DF9FF] sm:tracking-[0.25em]">
+                  <span
+                    className="relative inline-flex h-2.5 w-2.5 shrink-0"
+                    aria-hidden="true"
+                  >
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#22C55E] opacity-70" />
+                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#22C55E] shadow-[0_0_14px_rgba(34,197,94,0.65)]" />
+                  </span>
+                  <span>{hero.badge}</span>
+                </Badge>
+              </div>
 
               <NameLamp>
                 <h1 className="font-display text-4xl font-semibold tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl">
@@ -85,6 +91,17 @@ export function Hero() {
                 >
                   {hero.contactMe}
                 </Button>
+              </div>
+
+              <div className="relative mt-8 h-[260px] overflow-visible sm:h-[300px] lg:hidden">
+                <div className="pointer-events-none absolute left-1/2 top-[48%] h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#2F80FF]/18 blur-3xl" />
+                <div className="pointer-events-none absolute inset-x-4 bottom-0 h-20 bg-gradient-to-t from-[#03050C]/78 to-transparent" />
+                <SplineScene
+                  scene={HERO_SPLINE_SCENE}
+                  touchPointerTracking
+                  className="relative z-10 h-full origin-center -translate-y-5 scale-[1.16] drop-shadow-[0_24px_60px_rgba(125,249,255,0.18)] sm:scale-[1.2]"
+                />
+                <div className="pointer-events-none absolute inset-0 z-20 bg-[radial-gradient(circle_at_50%_24%,transparent_0%,rgba(3,5,12,0.06)_62%,rgba(3,5,12,0.38)_100%)]" />
               </div>
             </div>
           </Reveal>

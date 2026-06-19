@@ -416,18 +416,19 @@ export const dictionaries = {
       linkedinProfile: "LinkedIn profile",
     },
     hero: {
-      role: siteConfig.role,
+      role: "AI Engineer / Machine Learning Engineer",
       badge: "Available for new projects",
-      description: siteConfig.description,
+      description:
+        "Big Data & Artificial Intelligence graduate focused on applied machine learning, computer vision, NLP, and intelligent systems.",
       specialization:
-        "Specialized in machine learning, computer vision, NLP, RAG systems, generative AI, and data analytics.",
+        "This portfolio highlights my academic work, technical projects, and practical experience in building AI-driven solutions.",
       exploreProjects: "Explore Projects",
       downloadCv: "Download CV",
       contactMe: "Contact Me",
     },
     philosophy: {
       label: "Engineering Philosophy",
-      quote: "Build systems that are useful, clear, and reliable.",
+      quote: "I am because we are. i am everything that is.",
       title: "Code that turns ideas into intelligent systems.",
       lines: [
         "Build systems that are useful, clear, and reliable.",
@@ -482,26 +483,27 @@ export const dictionaries = {
     },
     aiStack: {
       label: "AI Stack",
-      title: "From models to real AI systems.",
-      description: "The tools I use across RAG, vision, ML, data, and robotics.",
+      title: "What I Work With",
+      description:
+        "A simple overview of the main skills I use across my academic projects, internships, and personal work.",
       cards: [
         {
-          title: "Generative AI & RAG",
-          description: "RAG, embeddings, local LLMs.",
-          label: "Core Strength",
-          status: "Active",
+          title: "Machine Learning",
+          description: "Model training, evaluation, and applied ML workflows.",
+          label: "Python / Scikit-learn / PyTorch",
+          status: "TensorFlow/Keras / Supervised",
         },
         {
           title: "Computer Vision",
-          description: "OCR, relighting, 3D vision.",
-          label: "Visual AI",
-          status: "Applied",
+          description: "Image processing, OCR, classification, and visual analysis.",
+          label: "OpenCV / OCR / CNN",
+          status: "Image Processing / Features",
         },
         {
-          title: "Machine Learning Systems",
-          description: "Training, evaluation, delivery.",
-          label: "ML Layer",
-          status: "Reliable",
+          title: "Data & Backend",
+          description: "Data handling and backend foundations behind AI systems.",
+          label: "SQL / Flask / APIs",
+          status: "Data Processing / Azure SQL",
         },
       ],
     },
@@ -576,16 +578,16 @@ export const dictionaries = {
       role: "Ingénieur IA / Ingénieur Machine Learning",
       badge: "Disponible pour de nouveaux projets",
       description:
-        "Diplômé en Big Data & Artificial Intelligence, je conçois des expériences alimentées par l'IA.",
+        "Diplômé en Big Data & Artificial Intelligence, spécialisé en machine learning appliqué, computer vision, NLP et systèmes intelligents.",
       specialization:
-        "Spécialisé en machine learning, computer vision, NLP, systèmes RAG, IA générative et data analytics.",
+        "Ce portfolio présente mes travaux académiques, mes projets techniques et mon expérience pratique dans la construction de solutions pilotées par l'IA.",
       exploreProjects: "Explorer les projets",
       downloadCv: "Télécharger le CV",
       contactMe: "Me contacter",
     },
     philosophy: {
       label: "Philosophie d'ingénierie",
-      quote: "Build systems that are useful, clear, and reliable.",
+      quote: "Je suis parce que nous sommes. Je suis tout ce qui est.",
       title: "Du code qui transforme les idées en systèmes intelligents.",
       lines: [
         "Construire des systèmes utiles, clairs et fiables.",
@@ -640,27 +642,27 @@ export const dictionaries = {
     },
     aiStack: {
       label: "Stack IA",
-      title: "Des modèles aux vrais systèmes IA.",
+      title: "Ce que j'utilise",
       description:
-        "Les outils que j'utilise en RAG, vision, ML, data et robotique.",
+        "Un aperçu simple des principales compétences que j'utilise dans mes projets académiques, mes stages et mon travail personnel.",
       cards: [
         {
-          title: "IA générative & RAG",
-          description: "RAG, embeddings, LLMs locaux.",
-          label: "Force principale",
-          status: "Actif",
+          title: "Machine Learning",
+          description: "Entraînement, évaluation et workflows ML appliqués.",
+          label: "Python / Scikit-learn / PyTorch",
+          status: "TensorFlow/Keras / Supervisé",
         },
         {
           title: "Computer Vision",
-          description: "OCR, relighting, vision 3D.",
-          label: "IA visuelle",
-          status: "Appliqué",
+          description: "Traitement d'image, OCR, classification et analyse visuelle.",
+          label: "OpenCV / OCR / CNN",
+          status: "Image Processing / Features",
         },
         {
-          title: "Systèmes Machine Learning",
-          description: "Entraînement, évaluation, livraison.",
-          label: "Couche ML",
-          status: "Fiable",
+          title: "Data & Backend",
+          description: "Gestion de données et bases backend derrière les systèmes IA.",
+          label: "SQL / Flask / APIs",
+          status: "Data Processing / Azure SQL",
         },
       ],
     },
@@ -848,16 +850,16 @@ export const dictionaries = {
       role: "مهندس ذكاء اصطناعي / مهندس تعلم آلي",
       badge: "متاح لمشاريع جديدة",
       description:
-        "خريج Big Data & Artificial Intelligence أطور تجارب وأنظمة مدعومة بالذكاء الاصطناعي.",
+        "خريج Big Data & Artificial Intelligence، أركز على machine learning التطبيقي والرؤية الحاسوبية وNLP والأنظمة الذكية.",
       specialization:
-        "متخصص في machine learning، والرؤية الحاسوبية، وNLP، وأنظمة RAG، والذكاء الاصطناعي التوليدي، وتحليل البيانات.",
+        "يعرض هذا الموقع أعمالي الأكاديمية ومشاريعي التقنية وخبرتي العملية في بناء حلول مدعومة بالذكاء الاصطناعي.",
       exploreProjects: "استكشاف المشاريع",
       downloadCv: "تحميل السيرة الذاتية",
       contactMe: "تواصل معي",
     },
     philosophy: {
       label: "فلسفة هندسية",
-      quote: "Build systems that are useful, clear, and reliable.",
+      quote: "أنا لأننا نحن. أنا كل ما هو موجود.",
       title: "كود يحول الأفكار إلى أنظمة ذكية.",
       lines: [
         "بناء أنظمة مفيدة وواضحة وموثوقة.",
@@ -912,27 +914,27 @@ export const dictionaries = {
     },
     aiStack: {
       label: "Stack الذكاء الاصطناعي",
-      title: "من النماذج إلى أنظمة ذكاء اصطناعي حقيقية.",
+      title: "ما أعمل به",
       description:
-        "الأدوات التي أستخدمها في RAG والرؤية وML والبيانات والروبوتيك.",
+        "نظرة بسيطة على المهارات الرئيسية التي أستخدمها في مشاريعي الأكاديمية وتدريباتي وأعمالي الشخصية.",
       cards: [
         {
-          title: "IA توليدية & RAG",
-          description: "RAG، embeddings، وLLMs محلية.",
-          label: "نقطة قوة",
-          status: "نشط",
+          title: "Machine Learning",
+          description: "تدريب النماذج وتقييمها وسير عمل ML تطبيقية.",
+          label: "Python / Scikit-learn / PyTorch",
+          status: "TensorFlow/Keras / Supervised",
         },
         {
           title: "Computer Vision",
-          description: "OCR، relighting، ورؤية ثلاثية الأبعاد.",
-          label: "رؤية ذكية",
-          status: "تطبيقي",
+          description: "معالجة الصور وOCR والتصنيف والتحليل البصري.",
+          label: "OpenCV / OCR / CNN",
+          status: "Image Processing / Feature Extraction",
         },
         {
-          title: "أنظمة Machine Learning",
-          description: "تدريب، تقييم، وتسليم.",
-          label: "طبقة ML",
-          status: "موثوق",
+          title: "Data & Backend",
+          description: "معالجة البيانات وأساسيات backend خلف أنظمة الذكاء الاصطناعي.",
+          label: "SQL / Flask / APIs",
+          status: "Data Processing / Azure SQL",
         },
       ],
     },

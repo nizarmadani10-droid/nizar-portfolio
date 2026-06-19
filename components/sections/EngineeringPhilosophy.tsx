@@ -12,27 +12,39 @@ const portraitSrc = "/personal/nizar-portrait.png";
 const reelTiles = [
   {
     className: "left-0 top-4 h-20 w-28",
-    animate: { y: [0, -22, 8, 0], opacity: [0.5, 0.88, 0.62, 0.5] },
+    animate: { y: [0, -26, 10, -8, 0], opacity: [0.5, 0.88, 0.62, 0.78, 0.5] },
+    duration: 3.2,
+    delay: 0,
   },
   {
     className: "left-0 bottom-4 h-20 w-28",
-    animate: { y: [0, 20, -8, 0], opacity: [0.44, 0.8, 0.58, 0.44] },
+    animate: { y: [8, -16, 24, -5, 8], opacity: [0.44, 0.74, 0.84, 0.56, 0.44] },
+    duration: 3.8,
+    delay: 0.45,
   },
   {
     className: "right-0 top-4 h-20 w-28",
-    animate: { y: [0, 24, -6, 0], opacity: [0.48, 0.86, 0.6, 0.48] },
+    animate: { y: [-6, 18, -24, 7, -6], opacity: [0.48, 0.76, 0.88, 0.6, 0.48] },
+    duration: 3.45,
+    delay: 0.9,
   },
   {
     className: "right-0 bottom-4 h-20 w-28",
-    animate: { y: [0, -24, 8, 0], opacity: [0.42, 0.78, 0.56, 0.42] },
+    animate: { y: [12, -22, 8, -14, 12], opacity: [0.42, 0.86, 0.58, 0.74, 0.42] },
+    duration: 4.05,
+    delay: 0.2,
   },
   {
     className: "left-[calc(50%-3.5rem)] top-0 h-16 w-28",
-    animate: { y: [0, -18, 6, 0], opacity: [0.46, 0.82, 0.58, 0.46] },
+    animate: { y: [-4, -28, 12, -10, -4], opacity: [0.46, 0.84, 0.58, 0.76, 0.46] },
+    duration: 3.65,
+    delay: 0.7,
   },
   {
     className: "bottom-0 left-[calc(50%-3.5rem)] h-16 w-28",
-    animate: { y: [0, 18, -6, 0], opacity: [0.4, 0.76, 0.54, 0.4] },
+    animate: { y: [6, 22, -18, 9, 6], opacity: [0.4, 0.66, 0.82, 0.54, 0.4] },
+    duration: 3.35,
+    delay: 1.05,
   },
 ];
 
@@ -63,9 +75,8 @@ export function EngineeringPhilosophy() {
                     shouldReduceMotion
                       ? undefined
                       : {
-                          x: [0, 6, -3, 0],
-                          y: [0, -26, 9, -14, 0],
-                          rotate: [0, -0.8, 0.6, -0.35, 0],
+                          x: [0, 5, -3, 0],
+                          rotate: [0, -0.7, 0.45, 0],
                         }
                   }
                   whileHover={
@@ -86,7 +97,8 @@ export function EngineeringPhilosophy() {
                       )}
                       animate={shouldReduceMotion ? undefined : tile.animate}
                       transition={{
-                        duration: 3.1 + index * 0.22,
+                        duration: tile.duration,
+                        delay: tile.delay,
                         repeat: Infinity,
                         repeatType: "mirror",
                         ease: "easeInOut",
@@ -100,10 +112,15 @@ export function EngineeringPhilosophy() {
                       animate={
                         shouldReduceMotion
                           ? undefined
-                          : { scale: [1, 1.045, 0.995, 1] }
+                          : {
+                              y: [0, -12, 6, -4, 0],
+                              rotate: [0, 0.55, -0.35, 0.2, 0],
+                              scale: [1, 1.04, 0.995, 1.02, 1],
+                            }
                       }
                       transition={{
-                        duration: 3.4,
+                        duration: 3.6,
+                        delay: 0.3,
                         repeat: Infinity,
                         ease: "easeInOut",
                       }}

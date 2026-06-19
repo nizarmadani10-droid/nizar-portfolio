@@ -10,6 +10,7 @@ import { EngineeringPhilosophy } from "@/components/sections/EngineeringPhilosop
 import { Experience } from "@/components/sections/Experience";
 import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
 import { Hero } from "@/components/sections/Hero";
+import { HeroCinematicBackground } from "@/components/ui/HeroCinematicBackground";
 import { getDirection, type Locale } from "@/lib/i18n";
 
 export function PortfolioHome({ locale }: { locale: Locale }) {
@@ -23,8 +24,13 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
         <ScrollProgress />
         <AnimatedGrid />
         <Navbar />
-        <Hero />
-        <EngineeringPhilosophy />
+        <div className="relative overflow-hidden">
+          <HeroCinematicBackground />
+          <div className="relative z-10">
+            <Hero />
+            <EngineeringPhilosophy />
+          </div>
+        </div>
         <FeaturedProjects />
         <AIStack />
         <Experience />
