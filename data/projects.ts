@@ -1,3 +1,5 @@
+import { projectPapers, type ProjectPaper } from "@/data/projectPapers";
+
 export type ProjectCategory =
   | "Language AI"
   | "Computer Vision"
@@ -20,6 +22,7 @@ export type Project = {
   thumbnailImage?: string;
   heroImageAlt?: string;
   heroImage?: string;
+  paper?: ProjectPaper;
   githubUrl?: string;
 };
 
@@ -50,6 +53,7 @@ export const projects: Project[] = [
     heroImage: "/project-backgrounds/rag-background.png",
     heroImageAlt:
       "A document intelligence assistant with files, database, and conversational AI elements.",
+    paper: projectPapers["rag-conversational-assistant"],
     githubUrl: "https://github.com/nizarmadani10-droid/NLP-PROJECT",
   },
   {
@@ -78,6 +82,7 @@ export const projects: Project[] = [
     heroImage: "/project-backgrounds/intelligent-parking-background.png",
     heroImageAlt:
       "An intelligent parking garage scene with a vehicle, camera, and analytics dashboard.",
+    paper: projectPapers["intelligent-parking-system"],
     githubUrl: "https://github.com/nizarmadani10-droid/NLP-PROJECT",
   },
   {
@@ -106,6 +111,7 @@ export const projects: Project[] = [
     heroImage: "/project-backgrounds/rti-ptm-background.png",
     heroImageAlt:
       "A coin relighting and computer vision lab with inspection lights and surface analysis screens.",
+    paper: projectPapers["rti-ptm-coin-relighting"],
     githubUrl: "https://github.com/nizarmadani10-droid/NLP-PROJECT",
   },
   {
@@ -128,6 +134,7 @@ export const projects: Project[] = [
     heroImage: "/project-backgrounds/ros-robotics-background.png",
     heroImageAlt:
       "A robotics path-planning scene with a rover, digital map, and autonomous navigation interface.",
+    paper: projectPapers["ros-robotics-project"],
     githubUrl: "https://github.com/nizarmadani10-droid/NLP-PROJECT",
   },
   {
@@ -165,6 +172,7 @@ export const projects: Project[] = [
     heroImage: "/project-backgrounds/english-darija-translator-background.png",
     heroImageAlt:
       "A neural translation interface connecting English input to Moroccan Darija output.",
+    paper: projectPapers["english-darija-translator"],
     githubUrl: "https://github.com/nizarmadani10-droid/NLP-PROJECT",
   },
   {
@@ -202,6 +210,7 @@ export const projects: Project[] = [
     heroImage: "/project-backgrounds/butterfly-image-classification-background.png",
     heroImageAlt:
       "A butterfly image classification scene with detected species and model confidence panels.",
+    paper: projectPapers["butterfly-image-classification"],
     githubUrl: "https://github.com/nizarmadani10-droid/NLP-PROJECT",
   },
 ];

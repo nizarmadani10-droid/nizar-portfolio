@@ -21,8 +21,13 @@
     "AI Portfolio",
     "AI-powered systems",
   ],
-  email: "your.email@example.com",
-  cvPath: "/cv/Nizar_Madani_CV.pdf",
+  email: "nizar.madani@uir.ac.ma",
+  cvPath: "/cv/nizar-madani-cv-en.pdf",
+  cvPaths: {
+    en: "/cv/nizar-madani-cv-en.pdf",
+    fr: "/cv/nizar-madani-cv-fr.pdf",
+    ar: "/cv/nizar-madani-cv-en.pdf",
+  },
   links: {
     github: "https://github.com/nizarmadani10-droid",
     linkedin: "PASTE_YOUR_LINKEDIN_URL_HERE",

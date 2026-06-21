@@ -10,6 +10,10 @@ import { I18nProvider } from "@/components/providers/I18nProvider";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
+import {
+  ProjectPaperContent,
+  ProjectPaperPreview,
+} from "@/components/ui/ProjectPaperContent";
 import type { Project } from "@/data/projects";
 import { projects } from "@/data/projects";
 import { siteConfig } from "@/lib/constants";
@@ -20,6 +24,7 @@ import {
   getLocalizedProjects,
   homeHref,
   projectHref,
+  projectPaperHref,
   type Locale,
 } from "@/lib/i18n";
 
@@ -115,6 +120,10 @@ export function ProjectCaseStudy({
     notFound();
   }
 
+  const paperLink = isLocalizedRoute
+    ? projectPaperHref(locale, project.slug)
+    : `/projects/${project.slug}/paper`;
+
   const projectIndex = localizedProjects.findIndex(
     (item) => item.slug === project.slug,
   );
@@ -125,6 +134,7 @@ export function ProjectCaseStudy({
       ? localizedProjects[projectIndex + 1]
       : null;
   const copy = dictionary.projectDetail;
+  const paperCopy = dictionary.projectPaper;
 
   return (
     <I18nProvider locale={locale}>
@@ -304,6 +314,49 @@ export function ProjectCaseStudy({
                 </p>
               </div>
             </Card>
+
+            {project.paper && (
+              <Card className="mt-6 overflow-hidden p-0">
+                <div className="border-b border-white/10 px-6 py-5 sm:px-7 sm:py-6">
+                  <p className="font-code text-xs uppercase tracking-[0.24em] text-[#7DF9FF]">
+                    {paperCopy.eyebrow}
+                  </p>
+                  <div className="mt-3 grid gap-4 md:grid-cols-[0.45fr_0.55fr] md:items-end">
+                    <h2 className="font-display text-2xl font-semibold text-white md:text-3xl">
+                      {paperCopy.title}
+                    </h2>
+                    <p className="text-sm leading-7 text-[#8F9AAF]">
+                      {paperCopy.description}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="px-6 py-6 sm:px-7 sm:py-7">
+                  <ProjectPaperContent
+                    paper={project.paper}
+                    labels={paperCopy}
+                    lang={locale}
+                    dir={direction}
+                    className="hidden md:block"
+                  />
+
+                  <div className="md:hidden">
+                    <ProjectPaperPreview
+                      paper={project.paper}
+                      lang={locale}
+                      dir={direction}
+                    />
+                    <Button
+                      href={paperLink}
+                      variant="primary"
+                      className="mt-6 w-full"
+                    >
+                      {paperCopy.readFullPaper}
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+            )}
 
             {(previousProject || nextProject) && (
               <div className="mt-6 grid gap-4 md:grid-cols-2">

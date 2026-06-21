@@ -79,7 +79,10 @@ export function Hero() {
                 </MagneticButton>
 
                 <MagneticButton className="w-full sm:w-auto">
-                  <Button href={siteConfig.cvPath} className="w-full sm:w-auto">
+                  <Button
+                    href={siteConfig.cvPaths[locale]}
+                    className="w-full sm:w-auto"
+                  >
                     {hero.downloadCv}
                   </Button>
                 </MagneticButton>
@@ -93,16 +96,6 @@ export function Hero() {
                 </Button>
               </div>
 
-              <div className="relative mt-8 h-[260px] overflow-visible sm:h-[300px] lg:hidden">
-                <div className="pointer-events-none absolute left-1/2 top-[48%] h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#2F80FF]/18 blur-3xl" />
-                <div className="pointer-events-none absolute inset-x-4 bottom-0 h-20 bg-gradient-to-t from-[#03050C]/78 to-transparent" />
-                <SplineScene
-                  scene={HERO_SPLINE_SCENE}
-                  touchPointerTracking
-                  className="relative z-10 h-full origin-center -translate-y-5 scale-[1.16] drop-shadow-[0_24px_60px_rgba(125,249,255,0.18)] sm:scale-[1.2]"
-                />
-                <div className="pointer-events-none absolute inset-0 z-20 bg-[radial-gradient(circle_at_50%_24%,transparent_0%,rgba(3,5,12,0.06)_62%,rgba(3,5,12,0.38)_100%)]" />
-              </div>
             </div>
           </Reveal>
 

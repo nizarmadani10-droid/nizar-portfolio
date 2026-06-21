@@ -1,5 +1,6 @@
 import { educationTrajectory, languageCredentials } from "@/data/education";
 import { experiences } from "@/data/experience";
+import { projectPaperTranslations } from "@/data/projectPapers";
 import { projects, type Project, type ProjectCategory } from "@/data/projects";
 import { siteConfig } from "@/lib/constants";
 
@@ -45,6 +46,10 @@ export function homeHref(locale: Locale, hash?: string) {
 
 export function projectHref(locale: Locale, slug: string) {
   return `/${locale}/projects/${slug}`;
+}
+
+export function projectPaperHref(locale: Locale, slug: string) {
+  return `/${locale}/projects/${slug}/paper`;
 }
 
 const categoryLabels: Record<Locale, Record<ProjectCategory, string>> = {
@@ -481,6 +486,24 @@ export const dictionaries = {
       contactMe: "Contact Me",
       metadataSuffix: "AI Case Study",
     },
+    projectPaper: {
+      eyebrow: "Engineering Document",
+      title: "Technical Project Paper",
+      description:
+        "A concise academic-style breakdown of the project context, method, implementation, outcome, and engineering lessons.",
+      readFullPaper: "Read full paper",
+      backToProject: "Back to project",
+      metadataSuffix: "Technical Project Paper",
+      sections: {
+        abstract: "Abstract",
+        problemContext: "Problem Context",
+        methodology: "Methodology",
+        implementation: "Implementation",
+        results: "Results / Outcome",
+        limitations: "Limitations",
+        takeaways: "Technical Takeaways",
+      },
+    },
     aiStack: {
       label: "AI Stack",
       title: "What I Work With",
@@ -639,6 +662,24 @@ export const dictionaries = {
       githubRepository: "Dépôt GitHub",
       contactMe: "Me contacter",
       metadataSuffix: "Étude de cas IA",
+    },
+    projectPaper: {
+      eyebrow: "Document d'ingénierie",
+      title: "Article technique du projet",
+      description:
+        "Une synthèse académique concise du contexte, de la méthode, de l'implémentation, du résultat et des enseignements techniques du projet.",
+      readFullPaper: "Lire l'article complet",
+      backToProject: "Retour au projet",
+      metadataSuffix: "Article technique du projet",
+      sections: {
+        abstract: "Résumé",
+        problemContext: "Contexte du problème",
+        methodology: "Méthodologie",
+        implementation: "Implémentation",
+        results: "Résultats / résultat",
+        limitations: "Limites",
+        takeaways: "Enseignements techniques",
+      },
     },
     aiStack: {
       label: "Stack IA",
@@ -912,6 +953,24 @@ export const dictionaries = {
       contactMe: "تواصل معي",
       metadataSuffix: "دراسة حالة ذكاء اصطناعي",
     },
+    projectPaper: {
+      eyebrow: "وثيقة هندسية",
+      title: "ورقة المشروع التقنية",
+      description:
+        "عرض أكاديمي موجز لسياق المشروع ومنهجيته وتنفيذه ونتيجته والدروس الهندسية المستخلصة منه.",
+      readFullPaper: "قراءة الورقة كاملة",
+      backToProject: "العودة إلى المشروع",
+      metadataSuffix: "ورقة المشروع التقنية",
+      sections: {
+        abstract: "الملخص",
+        problemContext: "سياق المشكلة",
+        methodology: "المنهجية",
+        implementation: "التنفيذ",
+        results: "النتائج / المخرجات",
+        limitations: "القيود",
+        takeaways: "الدروس التقنية",
+      },
+    },
     aiStack: {
       label: "Stack الذكاء الاصطناعي",
       title: "ما أعمل به",
@@ -1114,10 +1173,15 @@ export function getDictionary(locale: Locale): Dictionary {
 
 export function getLocalizedProjects(locale: Locale): Project[] {
   const translations = projectTranslations[locale];
+  const paperTranslations =
+    locale === "en"
+      ? undefined
+      : (projectPaperTranslations[locale] as Record<string, Project["paper"]>);
 
   return projects.map((project) => ({
     ...project,
     ...translations[project.slug],
+    paper: paperTranslations?.[project.slug] ?? project.paper,
   }));
 }
 

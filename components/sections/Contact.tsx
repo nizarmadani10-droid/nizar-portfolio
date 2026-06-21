@@ -11,7 +11,7 @@ import { CopyEmailButton } from "@/components/ui/CopyEmailButton";
 import { siteConfig } from "@/lib/constants";
 
 export function Contact() {
-  const { dictionary } = useI18n();
+  const { locale, dictionary } = useI18n();
   const contact = dictionary.contact;
 
   return (
@@ -86,7 +86,7 @@ export function Contact() {
 
                 <CopyEmailButton className="w-full" />
 
-                <Button href={siteConfig.cvPath} className="w-full">
+                <Button href={siteConfig.cvPaths[locale]} className="w-full">
                   {contact.downloadCv}
                 </Button>
               </div>

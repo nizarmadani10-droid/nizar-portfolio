@@ -159,7 +159,7 @@ export function Navbar() {
               })}
             </div>
 
-            <Button href={siteConfig.cvPath} className="mt-2 w-full">
+            <Button href={siteConfig.cvPaths[locale]} className="mt-2 w-full">
               {nav.downloadCv}
             </Button>
           </div>
